@@ -1,0 +1,23 @@
+# Node.js
+node_modules/
+npm-debug.log
+.env
+
+# Logs
+logs
+*.log
+*.pid
+*.gz
+
+# Editor / IDE
+.vscode/
+*.swp
+
+# Docker
+docker-compose.override.yml
+*.local
+.docker/
+
+# Jenkins
+*.jenkins
+secrets/
