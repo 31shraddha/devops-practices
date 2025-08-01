@@ -65,7 +65,8 @@ git remote add origin "$remote_url"
 git remote -v
 
 echo "-----"
-git branch -a
+git fetch --all
+git branch -r
 
 echo "do you want to switch a branch?(yes/no): "branch
 if [[ branch == "Yes" ]]; then
