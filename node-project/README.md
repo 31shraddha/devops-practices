@@ -44,3 +44,57 @@ cd devops-node-app
 # Example: Express-based app
 npm init -y
 npm install express
+
+
+✅ Step 3: Docker (Containerize the App)
+#write a Dockerfile
+# Build & run:
+docker build -t devops-node-app .
+docker images
+docker run -d -p 3000:3000 --name my devops-node-app
+docker ps 
+#if container is not running, try docker ps --all
+if it exists but status is Exited(1) then 
+debug by using:
+docker log my
+🔸 Test: curl http://localhost:3000
+
+🔸 Push to DockerHub:
+docker tag devops-node-app yourdockerhubuser/devops-node-app:latest
+docker login
+
+https://login.docker.com/activate
+
+docker push yourdockerhubuser/devops-node-app:latest
+
+
+✅ Step 4. ✅ Step 4: Jenkins (CI/CD Automation)
+🔸 Install Jenkins:
+sudo apt update
+sudo apt install -y openjdk-11-jdk
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt install -y jenkins
+🔸 Start & Access Jenkins:
+
+sudo systemctl start jenkins
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+----------------------------------------------------
+# in my case, running jenkins inside docker
+Run Jenkins container
+docker run -d \
+  --name jenkins \
+  -p 8080:8080 \
+  -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home \
+  jenkins/jenkins:lts
+
+# Get Jenkins admin password
+# You’ll need the initial admin password to unlock Jenkins UI. Run:
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+-------------------------------------------------------------------
+🔸 Create a Pipeline Job:
+SCM: Git
+Jenkinsfile:
+
