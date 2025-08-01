@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-        git 'mygit'  // 🔥 This tells Jenkins to use your custom Git installation
+        git 'mygit'  
     }
 
   environment {
