@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  tools {
+        git 'mygit'  // 🔥 This tells Jenkins to use your custom Git installation
+    }
 
   environment {
     IMAGE_NAME = 'my-node-app'
