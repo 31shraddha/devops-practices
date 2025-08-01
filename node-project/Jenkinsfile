@@ -11,6 +11,11 @@ pipeline {
   }
 
   stages {
+     stage('Check Git Version') {
+            steps {
+                sh 'git --version'
+            }
+        }
     stage('Clone') {
       steps {
         git url: 'https://github.com/31shraddha/devops-practices.git', branch: 'main'
