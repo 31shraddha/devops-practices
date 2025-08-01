@@ -29,7 +29,7 @@ sudo apt update && sudo apt upgrade -y
 # Basic packages
 sudo apt install -y curl git unzip wget vim net-tools gnupg software-properties-comm
 
-# In my case, i'm using alpine linux:
+-- In my case, i'm using alpine linux:
 apk add --update nodejs npm.
 
 
@@ -41,14 +41,14 @@ git clone https://github.com/yourname/devops-node-app.git
 cd devops-node-app
 
 🔸 Add Node.js app:
-# Example: Express-based app
+-- Example: Express-based app
 npm init -y
 npm install express
 
 
 ✅ Step 3: Docker (Containerize the App)
-#write a Dockerfile
-# Build & run:
+-- write a Dockerfile
+-- Build & run:
 docker build -t devops-node-app .
 docker images
 docker run -d -p 3000:3000 --name my devops-node-app
@@ -81,7 +81,7 @@ sudo apt install -y jenkins
 sudo systemctl start jenkins
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ----------------------------------------------------
-# in my case, running jenkins inside docker
+-- in my case, running jenkins inside docker
 Run Jenkins container
 docker run -d \
   --name jenkins \
@@ -90,11 +90,12 @@ docker run -d \
   -v jenkins_home:/var/jenkins_home \
   jenkins/jenkins:lts
 
-# Get Jenkins admin password
-# You’ll need the initial admin password to unlock Jenkins UI. Run:
+-- Get Jenkins admin password
+-- You’ll need the initial admin password to unlock Jenkins UI. Run:
 docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 -------------------------------------------------------------------
 🔸 Create a Pipeline Job:
-SCM: Git
+SCM: Git, update the script Path: nodeapp/Jenkinsfile
 Jenkinsfile:
+
 
