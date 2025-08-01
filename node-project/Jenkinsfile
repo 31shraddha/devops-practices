@@ -1,11 +1,42 @@
 pipeline {
   agent any
 
+  environment {
+    IMAGE_NAME = 'my-node-app'
+    CONTAINER_NAME = 'nodeapp'
+    PORT = '3000'
+  }
+
   stages {
-    stage('Build') {
+    stage('Clone') {
       steps {
-        echo 'Hello, Jenkins!'
+        git url: 'https://github.com/31shraddha/devops-practices.git', branch: 'main'
       }
+    }
+
+    stage('Build Docker Image') {
+      steps {
+        sh 'docker build -t $IMAGE_NAME .'
+      }
+    }
+
+    stage('Run Docker Container') {
+      steps {
+        sh '''
+          docker stop $CONTAINER_NAME || true
+          docker rm $CONTAINER_NAME || true
+          docker run -d -p $PORT:$PORT --name $CONTAINER_NAME $IMAGE_NAME
+        '''
+      }
+    }
+  }
+
+  post {
+    success {
+      echo 'Node app deployed successfully!'
+    }
+    failure {
+      echo 'Build failed!'
     }
   }
 }
