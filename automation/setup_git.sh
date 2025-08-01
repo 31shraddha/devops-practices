@@ -71,7 +71,7 @@ git branch -r
 echo "do you want to switch a branch?(yes/no): "branch
 if [[ branch == "Yes" ]]; then
   read -p "Enter the branch name: "branch_name
-  git checkout "$branch_name"
+  git checkout -b "$branch_name" origin/$branch_name
 else 
   git branch -M main
   branch_name="main"
