@@ -1,0 +1,22 @@
+pipeline {
+  agent any
+  stages{
+    stage('clone'){
+      steps{
+        git 'https://github.com/31shraddha/devops-practices.git'
+      }
+    }
+    stage('Build Docker'){
+        steps {
+          sh 'docker build -t devops-node-app .'
+        }
+    }
+    stage('Push Docker'){
+        steps{
+          withCredentials([usernamePassword(credentialId: 'dockerhub-creds',usernameVariable: 'USER',passwordVariable: 'PASS')]) 
+          sh 'echo $PASS | docker login -u $USER --password'
+          sh 'docker tag devops-node-app 31shraddha/devops-node-app:latest'
+        }
+    }
+  }
+}
